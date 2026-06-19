@@ -1,15 +1,16 @@
-<<?php
+<?php
+require 'auth.php';
+yeu_cau_dang_nhap('admin');
 require 'db.php';
-$action = $_GET['action'] ?? '';
+
 $id = $_GET['id'] ?? '';
 
-if ($action == 'user') {
-    $pdo->prepare("UPDATE dangkytk SET status = 'da_duyet' WHERE id = ?")->execute([$id]);
-} elseif ($action == 'product') {
-    $pdo->prepare("UPDATE sanpham SET status = 'da_duyet' WHERE id = ?")->execute([$id]);
+// Duyệt sản phẩm: chuyển trạng thái duyệt sang 'da_duyet'
+if ($id !== '') {
+    $pdo->prepare("UPDATE sanpham SET trang_thai_duyet = 'da_duyet' WHERE id = ?")->execute([$id]);
 }
 
-// Dòng này quan trọng: Nó giúp trang web tải lại sau khi duyệt xong
+// Quay lại trang quản trị sau khi duyệt xong
 header('Location: admin.php');
-exit; 
+exit;
 ?>

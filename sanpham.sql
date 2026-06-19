@@ -34,7 +34,6 @@ CREATE TABLE `sanpham` (
   `ngay_thuhoach` date NOT NULL,
   `trang_thai` varchar(100) DEFAULT 'Vừa thu hoạch',
   `trang_thai_duyet` varchar(20) DEFAULT 'cho_duyet',
-  `status` varchar(20) DEFAULT 'cho_duyet',
   `phan_loai` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -42,10 +41,10 @@ CREATE TABLE `sanpham` (
 -- Đang đổ dữ liệu cho bảng `sanpham`
 --
 
-INSERT INTO `sanpham` (`id`, `ten_nongsan`, `ten_nongdan`, `ngay_thuhoach`, `trang_thai`, `trang_thai_duyet`, `status`, `phan_loai`) VALUES
-('LOT-001', 'Dưa hấu hắc mỹ nhân', 'Nguyễn Văn Ruộng', '2026-05-10', 'Đã đến điểm bán', 'cho_duyet', 'da_duyet', NULL),
-('LOT-002', 'Xoài cát Hòa Lộc', 'Trần Thị Vườn', '2026-05-12', 'Đang vận chuyển', 'cho_duyet', 'da_duyet', NULL),
-('NS007', 'Chè xanh (Trà xanh)', 'nongdan', '0000-00-00', 'Vừa thu hoạch', 'cho_duyet', 'da_duyet', 'Cây công nghiệp');
+INSERT INTO `sanpham` (`id`, `ten_nongsan`, `ten_nongdan`, `ngay_thuhoach`, `trang_thai`, `trang_thai_duyet`, `phan_loai`) VALUES
+('LOT-001', 'Dưa hấu hắc mỹ nhân', 'Nguyễn Văn Ruộng', '2026-05-10', 'Đã đến điểm bán', 'da_duyet', NULL),
+('LOT-002', 'Xoài cát Hòa Lộc', 'Trần Thị Vườn', '2026-05-12', 'Đang vận chuyển', 'da_duyet', NULL),
+('NS007', 'Chè xanh (Trà xanh)', 'nongdan', '0000-00-00', 'Vừa thu hoạch', 'da_duyet', 'Cây công nghiệp');
 
 --
 -- Chỉ mục cho các bảng đã đổ

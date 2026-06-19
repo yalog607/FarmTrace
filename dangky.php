@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Nếu đã đăng nhập rồi thì không cần đăng ký tài khoản mới nữa, chuyển về trang chủ
 if (isset($_SESSION['user_logged']) && $_SESSION['user_logged'] === true) {
-    header('Location: index 3.php');
+    header('Location: index.php');
     exit;
 }
 

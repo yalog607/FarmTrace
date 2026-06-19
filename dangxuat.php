@@ -10,7 +10,7 @@ session_unset();
 // 3. Hủy hoàn toàn phiên làm việc của Session trên máy chủ
 session_destroy();
 
-// 4. Chuyển hướng người dùng về thẳng trang chủ index 3.php sạch sẽ
-header('Location: index3.php');
+// 4. Chuyển hướng người dùng về thẳng trang chủ index.php sạch sẽ
+header('Location: index.php');
 exit;
 ?>

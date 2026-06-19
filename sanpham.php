@@ -36,14 +36,6 @@ if (isset($pdo)) {
         :root { --primary: #059669; --dark: #1e293b; --text: #475569; --border: #e2e8f0; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background-color: #f8fafc; color: var(--dark); }
-        
-        /* Navbar */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 80px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .logo { font-size: 22px; font-weight: 700; color: var(--primary); text-decoration: none; }
-        .nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; }
-        .nav-links a.active { color: var(--primary); font-weight: 600; }
-        .btn-dashboard { background: #f1f5f9; padding: 8px 16px; border-radius: 6px; color: var(--dark) !important; font-weight: 600 !important; }
 
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
         
@@ -74,18 +66,7 @@ if (isset($pdo)) {
 </head>
 <body>
 
-    <nav class="navbar">
-        <a href="index3.php" class="logo"><i class="fa-solid fa-seedling"></i> FarmTrace</a>
-        <ul class="nav-links">
-            <li><a href="index3.php">Trang chủ</a></li>
-            <li><a href="sanpham.php" class="active">Sản phẩm</a></li>
-            <li><a href="trantonghop.php">Quản lý lô hàng (Tổng hợp)</a></li>
-            
-            <?php if ($role !== 'khach'): ?>
-                <li><a href="<?= $role ?>.php" class="btn-dashboard">Trang của bạn (<?= strtoupper($role) ?>)</a></li>
-            <?php endif; ?>
-        </ul>
-    </nav>
+    <?php include 'menu.php'; ?>
 
     <div class="container">
         <div style="margin-bottom: 25px;">

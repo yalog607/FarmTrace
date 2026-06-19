@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_logged']) || $_SESSION['role'] !== 'admin') {
-    header('Location: dangnhap.php');
-    exit;
-}
+require 'auth.php';
+yeu_cau_dang_nhap('admin');
 require 'db.php';
 ?>
 <!DOCTYPE html>
@@ -24,7 +21,7 @@ require 'db.php';
         <table>
             <tr><th>Mã Lô</th><th>Tên Nông Sản</th><th>Trạng thái</th><th>Thao tác</th></tr>
             <?php
-            stmt = $pdo->query("SELECT * FROM sanpham WHERE trang_thai_duyet = 'cho_duyet'");
+            $stmt = $pdo->query("SELECT * FROM sanpham WHERE trang_thai_duyet = 'cho_duyet'");
             $prods = $stmt->fetchAll();
             
             if ($prods && count($prods) > 0) {
@@ -33,7 +30,7 @@ require 'db.php';
                             <td>" . htmlspecialchars($p['id'] ?? '') . "</td>
                             <td>" . htmlspecialchars($p['ten_nongsan'] ?? '') . "</td>
                             <td>" . htmlspecialchars($p['phan_loai'] ?? '') . "</td> <td><span style='color:orange;'>Đang chờ duyệt</span></td>
-                            <td><a href='adminduyet.php?action=product&id={$p['id']}' class='btn-duyet'>Duyệt</a></td>
+                            <td><a href='adminduyet.php?id=" . urlencode($p['id']) . "' class='btn-duyet'>Duyệt</a></td>
                           </tr>";
                 }
             } else {

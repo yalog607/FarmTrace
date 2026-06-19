@@ -1,10 +1,6 @@
-<<?php
-session_start();
-// Kiểm tra quyền truy cập
-if (!isset($_SESSION['user_logged']) || $_SESSION['role'] !== 'nongdan') {
-    header('Location: dangnhap.php');
-    exit;
-}
+<?php
+require 'auth.php';
+yeu_cau_dang_nhap('nongdan');
 require_once 'db.php';
 
 $msg = "";
@@ -16,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $ten_nongdan = $_SESSION['username'];
 
     try {
-        // Lưu ý: status mặc định là 'cho_duyet', trang_thai mặc định là 'Vừa thu hoạch'
-        $stmt = $pdo->prepare("INSERT INTO sanpham (id, ten_nongsan, phan_loai, ten_nongdan, status, trang_thai, trang_thai_duyet) VALUES (?, ?, ?, ?, 'cho_duyet', 'Vừa thu hoạch', 'cho_duyet')");
+        // Lô mới: trang_thai_duyet = 'cho_duyet' (chờ admin duyệt), trang_thai = 'Vừa thu hoạch'
+        $stmt = $pdo->prepare("INSERT INTO sanpham (id, ten_nongsan, phan_loai, ten_nongdan, trang_thai, trang_thai_duyet) VALUES (?, ?, ?, ?, 'Vừa thu hoạch', 'cho_duyet')");
         $stmt->execute([$id, $ten, $phan_loai, $ten_nongdan]);
         $msg = "<div style='color: green; background: #d1fae5; padding: 15px; border-radius: 8px; margin-bottom: 20px;'>✅ Đã gửi yêu cầu thu hoạch: " . htmlspecialchars($ten) . ". Đang chờ Admin duyệt!</div>";
     } catch (PDOException $e) {

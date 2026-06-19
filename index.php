@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     session_unset();
     session_destroy();
-    header('Location: index3.php');
+    header('Location: index.php');
     exit;
 }
 ?>

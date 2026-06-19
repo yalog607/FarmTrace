@@ -31,19 +31,17 @@ CREATE TABLE `dangkytk` (
   `tendangnhap` varchar(50) NOT NULL,
   `matkhau` varchar(255) NOT NULL,
   `phanquyen` varchar(20) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `status` varchar(20) DEFAULT 'cho_duyet'
+  `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `dangkytk`
 --
 
-INSERT INTO `dangkytk` (`tendangnhap`, `matkhau`, `phanquyen`, `email`, `status`) VALUES
-('[value-1]', '[value-2]', '[value-3]', '[value-4]', 'cho_duyet'),
-('vanchuyen', 'vanchuyen01234', 'vanchuyen', 'vanchuyen5687@gmail.com', 'cho_duyet'),
-('admin', 'admin6785', 'admin', 'admin2468@gmail.com', 'cho_duyet'),
-('nongdan', 'nongdan1234', 'nongdan', 'nongdan87945@gmail.com', 'cho_duyet');
+INSERT INTO `dangkytk` (`tendangnhap`, `matkhau`, `phanquyen`, `email`) VALUES
+('vanchuyen', 'vanchuyen01234', 'vanchuyen', 'vanchuyen5687@gmail.com'),
+('admin', 'admin6785', 'admin', 'admin2468@gmail.com'),
+('nongdan', 'nongdan1234', 'nongdan', 'nongdan87945@gmail.com');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

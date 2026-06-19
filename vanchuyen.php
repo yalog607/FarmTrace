@@ -1,11 +1,7 @@
 <?php
-// Khởi động session và kiểm tra quyền
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
-if (!isset($_SESSION['user_logged']) || $_SESSION['role'] !== 'vanchuyen') {
-    header('Location: dangnhap.php');
-    exit;
-}
-require 'db.php'; // Đảm bảo file db.php của bạn nằm cùng thư mục
+require 'auth.php';
+yeu_cau_dang_nhap('vanchuyen');
+require 'db.php';
 ?>
 
 <!DOCTYPE html>
@@ -20,51 +16,27 @@ require 'db.php'; // Đảm bảo file db.php của bạn nằm cùng thư mục
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { padding: 15px; border: 1px solid #ddd; text-align: left; }
         th { background-color: #f1f5f9; }
-        .btn-nhan { background: #0284c7; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1><i class="fa-solid fa-truck"></i> Lô hàng chờ vận chuyển</h1>
-	<div class="card" style="margin-bottom: 30px;">
-        <h3><i class="fa-solid fa-list"></i> Danh sách đơn hàng chờ vận chuyển</h3>
-        <table style="width:100%; border-collapse: collapse; margin-top:20px;">
-        <?php
-        require 'db.php';
-        // Chỉ hiện đơn đã được duyệt và chưa vận chuyển
-        $ds = $pdo->query("SELECT * FROM sanpham WHERE trang_thai_duyet = 'da_duyet' AND trang_thai = 'Vừa thu hoạch'")->fetchAll();
-        foreach($ds as $row):
-        ?>
-        <tr>
-            <td style="padding:12px; border:1px solid #cbd5e1;"><?= $row['id'] ?></td>
-            <td style="padding:12px; border:1px solid #cbd5e1;"><?= $row['ten_nongsan'] ?></td>
-            <td style="padding:12px; border:1px solid #cbd5e1;">
-                <a href="update_vanchuyen.php?id=<?= $row['id'] ?>" style="color:#0284c7; font-weight:bold;">Nhận vận chuyển</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-</div>
-        
+        <h3><i class="fa-solid fa-list"></i> Danh sách đơn đã duyệt, sẵn sàng vận chuyển</h3>
         <table>
             <tr>
                 <th>Mã Lô</th>
                 <th>Tên Sản Phẩm</th>
                 <th>Người gửi</th>
-                <th>Thao tác</th>
             </tr>
             <?php
-            // Lấy danh sách sản phẩm từ nông dân
-            $ds = $pdo->query("SELECT * FROM sanpham WHERE trang_thai = 'Vừa thu hoạch'")->fetchAll();
-            foreach($ds as $row):
+            // Chỉ hiện đơn đã được admin duyệt và chưa vận chuyển
+            $ds = $pdo->query("SELECT * FROM sanpham WHERE trang_thai_duyet = 'da_duyet' AND trang_thai = 'Vừa thu hoạch'")->fetchAll();
+            foreach ($ds as $row):
             ?>
             <tr>
                 <td><?= htmlspecialchars($row['id']) ?></td>
                 <td><?= htmlspecialchars($row['ten_nongsan']) ?></td>
                 <td><?= htmlspecialchars($row['ten_nongdan']) ?></td>
-                <td>
-                    <a href="update_vanchuyen.php?id=<?= $row['id'] ?>" class="btn-nhan">Nhận vận chuyển</a>
-                </td>
             </tr>
             <?php endforeach; ?>
         </table>

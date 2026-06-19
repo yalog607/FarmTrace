@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Nếu đã đăng nhập rồi thì không cho phép ở lại trang đăng nhập này nữa
 if (isset($_SESSION['user_logged']) && $_SESSION['user_logged'] === true) {
-    header('Location: index3.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['username']    = $user_db['tendangnhap'];
                 $_SESSION['role']        = $user_db['phanquyen'];
 
-                header('Location: index3.php'); // Chuyển về trang chủ
+                header('Location: index.php'); // Chuyển về trang chủ
                 exit;
             } else {
                 $error = 'Tài khoản, mật khẩu hoặc vai trò không chính xác!';

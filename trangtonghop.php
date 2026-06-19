@@ -1,15 +1,7 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-// Kết nối CSDL
+require 'auth.php';
+yeu_cau_dang_nhap(); // chỉ cần đã đăng nhập
 require_once 'db.php';
-
-// Kiểm tra quyền: Chỉ những người đã đăng nhập mới được vào trang tổng hợp nội bộ này
-if (!isset($_SESSION['user_logged'])) {
-    header('Location: dangnhap.php');
-    exit;
-}
 
 $role = $_SESSION['role'] ?? 'khach';
 $cac_lo_hang = [];

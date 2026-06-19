@@ -102,32 +102,26 @@ $active_page = basename($_SERVER['PHP_SELF']);
 </style>
 
 <nav class="farmtrace-navbar">
-    <a href="index3.php" class="logo">
+    <a href="index.php" class="logo">
         <i class="fa-solid fa-seedling"></i> FarmTrace
     </a>
 
     <ul class="nav-links">
         <li>
-            <a href="index3.php" class="<?= ($active_page == 'index3.php' || $active_page == 'index 3.php') ? 'active' : '' ?>">
+            <a href="index.php" class="<?= $active_page == 'index.php' ? 'active' : '' ?>">
                 <i class="fa-solid fa-house"></i> Trang chủ
             </a>
         </li>
-        
+
         <li>
             <a href="sanpham.php" class="<?= $active_page == 'sanpham.php' ? 'active' : '' ?>">
                 <i class="fa-solid fa-basket-shopping"></i> Sản phẩm
             </a>
         </li>
-		
-		<li>
-            <a href="gioithieu.php" class="<?= $active_page == 'gioithieu.php' ? 'active' : '' ?>">
-                <i class="fa-solid fa-circle-info"></i> Giới thiệu
-            </a>
-        </li>
-        
+
         <?php if ($current_role !== 'khach'): ?>
             <li>
-                <a href="trangtonghop.php" class="<?= $active_page == 'sanpham_tonghop.php' ? 'active' : '' ?>">
+                <a href="trangtonghop.php" class="<?= $active_page == 'trangtonghop.php' ? 'active' : '' ?>">
                     <i class="fa-solid fa-list-check"></i> Quản lý lô hàng
                 </a>
             </li>
@@ -148,7 +142,7 @@ $active_page = basename($_SERVER['PHP_SELF']);
                 <i class="fa-regular fa-circle-user"></i> Chào, <strong><?= htmlspecialchars($current_user) ?></strong>
                 <span class="role-badge"><?= $current_role ?></span>
             </div>
-            <a href="index3.php?action=logout" class="btn-nav btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
+            <a href="index.php?action=logout" class="btn-nav btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
         <?php else: ?>
             <a href="dangnhap.php" class="btn-nav btn-login"><i class="fa-solid fa-lock"></i> Đăng nhập</a>
         <?php endif; ?>
