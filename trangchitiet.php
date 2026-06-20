@@ -5,6 +5,22 @@ require_once 'db.php';
 $ma_lo = $_GET['id'] ?? '';
 $san_pham = null;
 $timeline = [];
+$thong_bao = '';
+
+// Tài khoản vận chuyển có thể thêm một mốc lịch trình mới cho lô hàng này
+$role = $_SESSION['role'] ?? '';
+if ($role === 'vanchuyen' && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($pdo) && !empty($ma_lo)) {
+    $giai_doan = trim($_POST['giai_doan'] ?? '');
+    $noi_dung  = trim($_POST['noi_dung'] ?? '');
+    if ($giai_doan !== '' && $noi_dung !== '') {
+        $nguoi_xacnhan = ($_SESSION['username'] ?? 'Nhà vận chuyển') . ' (Nhà vận chuyển)';
+        $stmt_them = $pdo->prepare("INSERT INTO lichtrinh (sanpham_id, giai_doan, thoi_gian, noi_dung, nguoi_xacnhan) VALUES (?, ?, NOW(), ?, ?)");
+        $stmt_them->execute([$ma_lo, $giai_doan, $noi_dung, $nguoi_xacnhan]);
+        $thong_bao = 'Đã thêm mốc lịch trình mới!';
+    } else {
+        $thong_bao = 'Vui lòng nhập đầy đủ giai đoạn và nội dung!';
+    }
+}
 
 if (isset($pdo) && !empty($ma_lo)) {
     try {
@@ -59,6 +75,24 @@ if (isset($pdo) && !empty($ma_lo)) {
                 </div>
                 <?php endforeach; ?>
             </div>
+
+            <?php if ($role === 'vanchuyen'): ?>
+                <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+                <h3 style="color: var(--primary);"><i class="fa-solid fa-plus"></i> Thêm mốc lịch trình mới</h3>
+                <?php if (!empty($thong_bao)): ?>
+                    <p style="color: var(--primary); font-weight: 600; margin: 10px 0;"><?= htmlspecialchars($thong_bao) ?></p>
+                <?php endif; ?>
+                <form method="POST" style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+                    <input type="text" name="giai_doan" placeholder="Giai đoạn (VD: Vận chuyển lộ trình)" required
+                           style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                    <textarea name="noi_dung" rows="3" placeholder="Nội dung chi tiết (VD: Bốc xếp lên xe đông lạnh...)" required
+                              style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;"></textarea>
+                    <button type="submit"
+                            style="padding: 10px; background: var(--primary); color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                        Thêm lịch trình
+                    </button>
+                </form>
+            <?php endif; ?>
         <?php else: ?>
             <p>Không tìm thấy thông tin lô hàng này.</p>
         <?php endif; ?>
