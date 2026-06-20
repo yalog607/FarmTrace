@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 </head>
 <body>
     <div class="container">
+        <a href="trangtonghop.php" style="display: inline-block; margin-bottom: 20px; color: #059669; text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-left"></i> Quay lại Quản lý lô hàng</a>
         <h2><i class="fa-solid fa-leaf"></i> Góc Nhà Sản Xuất</h2>
         <?php if($msg) echo $msg; ?>
 

@@ -28,6 +28,7 @@ if ($id !== '') {
 </head>
 <body>
     <div class="container">
+        <a href="trangtonghop.php" style="display: inline-block; margin-bottom: 20px; color: #059669; text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-left"></i> Quay lại Quản lý lô hàng</a>
         <h1><i class="fa-solid fa-truck"></i> Lô hàng chờ vận chuyển</h1>
         <h3><i class="fa-solid fa-list"></i> Danh sách đơn đã duyệt, đang vận chuyển</h3>
         <table>

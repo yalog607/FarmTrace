@@ -17,6 +17,7 @@ require 'db.php';
 </head>
 <body>
     <div class="container">
+        <a href="trangtonghop.php" style="display: inline-block; margin-bottom: 15px; color: #059669; text-decoration: none; font-weight: bold;">&larr; Quay lại Quản lý lô hàng</a>
         <h3>Danh sách Sản phẩm chờ duyệt</h3>
         <table>
             <tr><th>Mã Lô</th><th>Tên Nông Sản</th><th>Trạng thái</th><th>Thao tác</th></tr>
