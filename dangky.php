@@ -100,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Đăng ký</button>
         </form>
         <div class="link">Đã có tài khoản? <a href="dangnhap.php">Đăng nhập</a></div>
+        <div class="link"><a href="index.php">&larr; Quay lại trang chủ</a></div>
     </div>
 </body>
 </html>
