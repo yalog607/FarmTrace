@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $ten_nongdan = $_SESSION['username'];
 
     try {
-        // Lô mới: trang_thai_duyet = 'cho_duyet' (chờ admin duyệt), trang_thai = 'Vừa thu hoạch'
-        $stmt = $pdo->prepare("INSERT INTO sanpham (id, ten_nongsan, phan_loai, ten_nongdan, trang_thai, trang_thai_duyet) VALUES (?, ?, ?, ?, 'Vừa thu hoạch', 'cho_duyet')");
+        // Lô mới: lưu ngày thu hoạch = ngày hôm nay (CURDATE), trang_thai_duyet = 'cho_duyet' (chờ admin duyệt), trang_thai = 'Vừa thu hoạch'
+        $stmt = $pdo->prepare("INSERT INTO sanpham (id, ten_nongsan, phan_loai, ten_nongdan, ngay_thuhoach, trang_thai, trang_thai_duyet) VALUES (?, ?, ?, ?, CURDATE(), 'Vừa thu hoạch', 'cho_duyet')");
         $stmt->execute([$id, $ten, $phan_loai, $ten_nongdan]);
         $msg = "<div style='color: green; background: #d1fae5; padding: 15px; border-radius: 8px; margin-bottom: 20px;'>✅ Đã gửi yêu cầu thu hoạch: " . htmlspecialchars($ten) . ". Đang chờ Admin duyệt!</div>";
     } catch (PDOException $e) {

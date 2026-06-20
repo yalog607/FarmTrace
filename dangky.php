@@ -19,7 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    if (isset($pdo)) {
+    // Không cho phép tự đăng ký quyền Quản trị viên (admin).
+    // Chỉ chấp nhận hai vai trò: nông dân hoặc đơn vị vận chuyển.
+    if ($role !== 'nongdan' && $role !== 'vanchuyen') {
+        $error = 'Bạn không được phép đăng ký với quyền Quản trị viên!';
+    } elseif (isset($pdo)) {
         try {
             // Kiểm tra xem tên tài khoản hoặc email đã tồn tại hay chưa
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM dangkytk WHERE tendangnhap = ? OR email = ?");
@@ -79,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <select name="role" required>
                     <option value="nongdan">Nhà sản xuất / Nông dân</option>
                     <option value="vanchuyen">Đơn vị vận chuyển</option>
-                    <option value="admin">Quản trị viên</option>
                 </select>
             </div>
             <div class="form-group">
